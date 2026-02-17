@@ -1,24 +1,18 @@
 import re
 
-class Token:
-    def __init__(self, type, value):
-        self.type = type
-        self.value = value
+code = input("Enter Source Code: ")
 
-def tokenize(code):
-    token_specification = [
-        ('NUMBER',   r'\d+'),
-        ('PLUS',     r'\+'),
-        ('MINUS',    r'-'),
-        ('ID',       r'[A-Za-z]+'),
-        ('SKIP',     r'[ \t]+'),
-    ]
-    
-    tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
-    
-    for mo in re.finditer(tok_regex, code):
-        kind = mo.lastgroup
-        value = mo.group()
-        if kind != 'SKIP':
-            yield Token(kind, value)
+tokens = re.findall(r'\w+|[=+;]', code)
+
+for token in tokens:
+    if token in ['int', 'float', 'char']:
+        print("Keyword :", token)
+    elif token.isdigit():
+        print("Number :", token)
+    elif token in ['=', '+']:
+        print("Operator :", token)
+    elif token == ';':
+        print("Symbol :", token)
+    else:
+        print("Identifier :", token)
 
