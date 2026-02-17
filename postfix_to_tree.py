@@ -29,3 +29,7 @@ root = construct_tree(postfix)
 
 print("Inorder Traversal of Expression Tree:")
 inorder(root)
+from tree_to_tac import generate_tac
+
+print("\nThree Address Code:")
+generate_tac(root)
